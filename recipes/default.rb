@@ -84,7 +84,7 @@ end
 
 # Set up redis service
 service 'redis' do
-  supports :reload => false, :restart => true, :start => true, :stop => true
+  supports :reload => false, :restart => false, :start => true, :stop => true, :status => false
   action [ :enable, :start ]
 end
 

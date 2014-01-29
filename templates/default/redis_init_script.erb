@@ -2,12 +2,15 @@
 #
 # Simple Redis init.d script conceived to work on Linux systems
 # as it does use of the /proc filesystem.
+#
+# chkconfig: 345 85 15
+# description: Start and stop redis service.
 
 REDISPORT=<%= node[:redis][:port] %>
 EXEC=<%= node[:redis][:install_dir] %>/bin/redis-server
 CLIEXEC=<%= node[:redis][:install_dir] %>/bin/redis-cli
 
-PIDFILE=<%= node[:redis][:install_dir] %>
+PIDFILE=<%= node[:redis][:pid_file] %>
 CONF=<%= "#{node[:redis][:conf_dir]}/#{node[:redis][:port]}.conf" %>
 
 case "$1" in
@@ -38,5 +41,6 @@ case "$1" in
         ;;
     *)
         echo "Please use start or stop as first argument"
+        exit 1
         ;;
 esac
